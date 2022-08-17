@@ -15,7 +15,7 @@ const ContactSchema = new Schema({
     },
     email:{
         type: String,
-        unique: true,
+        // unique: true,
         required: [true, 'Email is required'],
         match: [/.+\@.+\..+/, '** Email is invalid **'],
         max: [50, 'The email must have a maximum of 50 characters.']

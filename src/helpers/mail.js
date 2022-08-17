@@ -3,25 +3,33 @@ import nodemailer from 'nodemailer';
 
 export let info = async (firstName, lastName, email, message) => {
     // let testAccount = await nodemailer.createTestAccount();
-    const test = await nodemailer.createTransport({
-        host: "smtp.ethereal.email",
-        port: 587,
-        secure: false, // true for 465, false for other ports
+    const test = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true, // true for 465, false for other ports
         auth: {
             user: process.env.MAIL_USER, // generated ethereal user
             pass: process.env.MAIL_PASS, // generated ethereal password
         }
-    })
+    });
 
     await test.sendMail({
-        from: `"Fred Foo 👻" <${process.env.MAIL_USER}>`, // sender address
+        from: `"💕👨🏻‍💻 WEB MARGARITACAVERO.COM" <${process.env.MAIL_USER}>`, // sender address
         to: `developer@daniel-espanadero.com`, // list of receivers
-        subject: "Prueba de envío de mensaje", // Subject line
+        subject: `${firstName} ${lastName} ha contactado contigo a través de tu web`, // Subject line
         html: `
-            <p>Nombre: ${firstName}</p>
-            <p>Apellido: ${lastName}</p>
-            <p>Correo: ${email}</p>
-            <p>Mensaje: ${message}</p>
+            <h1 style='font-weight: bold; color: #e60092; text-align: center;'>💕 ¡Hola, Margarita! 💕</h1>
+            <br>
+            <p style='font-weight: bold; font-size: 20px; text-align: center;'>Aquí te dejo los datos que  han rellenado en el formulario de tu página web para contactar contigo:</p>
+            <p style='font-size: 20px;'><span style='font-weight: bold;'>Nombre: </span>${firstName}</p>
+            <p style='font-size: 20px;'><span style='font-weight: bold;'>Apellido: </span>${lastName}</p>
+            <p style='font-size: 20px;'><span style='font-weight: bold;'>Correo electrónico: </span>${email}</p>
+            <p style='font-size: 20px;'><span style='font-weight: bold;'>Mensaje:</p>
+            <p style='font-size: 20px;'>${message}</p>
             `, // html body
+    });
+
+    test.verify().then(() => {
+        console.log('Email sent successfully!');
     });
 }

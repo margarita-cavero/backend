@@ -20,7 +20,7 @@ export const contact = async (req, res) => {
 
         res.status(200).json({
             saveContact,
-            // info
+            info
         });
 
     } catch (error) {
