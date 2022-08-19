@@ -26,7 +26,7 @@ export const workPost = async (req, res) => {
 
 export const worksGet = async (req, res) => {
     try {
-        const works = await Work.find({});
+        const works = await Work.find({}).sort({ year: -1, title: 1});
 
         res.status(200).json({
             works
