@@ -1,18 +1,21 @@
 import express from 'express';
 import cors from 'cors';
 
+import config from '../config';
 import { connectDB } from '../db/config';
 
 import routerContact from '../routes/contact.routes';
 import routerWorks from '../routes/works.routes';
+import routerAuth from '../routes/auth.routes';
 
 class Server {
     constructor() {
         this.app = express();
-        this.port = process.env.PORT;
+        this.port = config.port;
         this.path = {
             contact: '/contact',
-            works: '/works'
+            works: '/works',
+            auth: '/auth'
         }
 
         this.middlewares();
@@ -37,6 +40,7 @@ class Server {
     routes() {
         this.app.use(this.path.contact, routerContact);
         this.app.use(this.path.works, routerWorks);
+        this.app.use(this.path.auth, routerAuth);
     };
 
     listen() {

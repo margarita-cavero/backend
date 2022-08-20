@@ -1,5 +1,7 @@
 import nodemailer from 'nodemailer';
 
+import config from '../config';
+
 
 export let info = async (firstName, lastName, email, message) => {
     // let testAccount = await nodemailer.createTestAccount();
@@ -8,13 +10,13 @@ export let info = async (firstName, lastName, email, message) => {
         port: 465,
         secure: true, // true for 465, false for other ports
         auth: {
-            user: process.env.MAIL_USER, // generated ethereal user
-            pass: process.env.MAIL_PASS, // generated ethereal password
+            user: config.mailUser, // generated ethereal user
+            pass: config.mailPass, // generated ethereal password
         }
     });
 
     await test.sendMail({
-        from: `"💕👨🏻‍💻 WEB MARGARITACAVERO.COM" <${process.env.MAIL_USER}>`, // sender address
+        from: `"💕👨🏻‍💻 WEB MARGARITACAVERO.COM" <${config.mailUser}>`, // sender address
         to: `developer@daniel-espanadero.com`, // list of receivers
         subject: `${firstName} ${lastName} ha contactado contigo a través de tu web`, // Subject line
         html: `

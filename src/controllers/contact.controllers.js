@@ -1,5 +1,4 @@
 import { Contact } from "../models/Contact";
-import { transporter } from "../config/mailer"; 
 import { info } from "../helpers/mail";
 
 export const contact = async (req, res) => {
