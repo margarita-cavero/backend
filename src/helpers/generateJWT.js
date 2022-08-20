@@ -15,5 +15,9 @@ export class GenerateJWT {
         });
 
         return sign;
-    }
-}
+    };
+
+    validate(){
+        jwt.verify(this.payload, config.privateKeyJWT);
+    };
+};
