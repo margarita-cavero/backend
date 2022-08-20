@@ -1,6 +1,8 @@
 import jwt from 'jsonwebtoken';
 
-export class JWT {
+import config from '../config';
+
+export class GenerateJWT {
     payload;
 
     constructor(payload){
@@ -8,6 +10,10 @@ export class JWT {
     }
 
     sign(){
-        // const sign = jwt.sign(this.payload, process.env.)
+        const sign = jwt.sign({id: this.payload}, config.privateKeyJWT, {
+            expiresIn: '4h'
+        });
+
+        return sign;
     }
 }

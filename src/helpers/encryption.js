@@ -1,15 +1,17 @@
-import bcryptjs, { hash } from 'bcryptjs';
+import bcryptjs from 'bcryptjs';
 
 export class Encryption {
 
-    encrypt;
-    
-    constructor(encrypt){
+    encrypt = '';
+    receivedPassword = '';
+
+    constructor(encrypt, receivedPassword) {
         this.encrypt = encrypt;
+        this.receivedPassword = receivedPassword;
     }
 
     // To hash a password
-    async hash(){
+    async hash() {
         const salt = await bcryptjs.genSalt(10);
         const hash = await bcryptjs.hash(this.encrypt, salt);
 
@@ -17,8 +19,8 @@ export class Encryption {
     }
 
     // To check a password
-    compare(){
-        const compare = bcryptjs.compare(this.encrypt, hash);
+    async compare() {
+        const compare = await bcryptjs.compare(this.receivedPassword, this.encrypt);
 
         return compare;
     }

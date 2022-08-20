@@ -9,6 +9,10 @@ const UserSchema = new Schema({
         type: String,
         required: [true, 'Password is required!']
     }
-});
+},
+    {
+        timestamps: true,
+        versionKey: false
+    });
 
 export const User = model('User', UserSchema);
